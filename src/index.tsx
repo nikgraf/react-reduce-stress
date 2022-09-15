@@ -17,7 +17,7 @@ console.error = (...args) => {
     args[1] === identifier
   ) {
     console.log(
-      "%c🙀 ‼️ATTENTION‼️ 🙀\nBecause you are using StrictMode in development React will unmount and remount every component, whenever a component mounts for the first time. Due remounting useEffect and useLayoutEffect run twice.\nLearn more here why it's important:%chttps://reactjs.org/docs/strict-mode.html#ensuring-reusable-state",
+      "%c🙀 ‼️ATTENTION‼️ 🙀\nBecause you are using StrictMode in development React will unmount and remount every component, whenever a component mounts for the first time. This means during this remounting useEffect and useLayoutEffect run twice.\nLearn more here why it's important:%chttps://reactjs.org/docs/strict-mode.html#ensuring-reusable-state",
       getConsoleStyle(),
       "line-height: 1.4; padding: 5px"
     );
