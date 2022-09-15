@@ -5,8 +5,8 @@ const identifier = "DO_NOT_USE_OR_YOU_WILL_BE_FIRED";
 const getConsoleStyle = () => {
   return window.matchMedia &&
     window.matchMedia("(prefers-color-scheme: dark)").matches
-    ? "color: red; font-size: 16px; line-height: 1.4; padding: 5px"
-    : "color: #e10000; font-size: 16px; line-height: 1.4; padding: 5px";
+    ? "color: red; line-height: 1.4; padding: 5px"
+    : "color: #e10000; line-height: 1.4; padding: 5px";
 };
 
 const originalConsoleError = console.error;
@@ -19,7 +19,7 @@ console.error = (...args) => {
     console.log(
       "%c🙀 ‼️ATTENTION‼️ 🙀\nBecause you are using StrictMode in development React will run useEffects and useLayoutEffects twice.\nLearn more here why it's important:%chttps://reactjs.org/docs/strict-mode.html#ensuring-reusable-state",
       getConsoleStyle(),
-      "font-size: 16px; line-height: 1.4; padding: 5px"
+      "line-height: 1.4; padding: 5px"
     );
   } else {
     originalConsoleError(...args);
