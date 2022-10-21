@@ -11,7 +11,7 @@ yarn add react-reduce-stress
 ```
 
 ```tsx
-import ReduceStress from "react-reduce-stress";
+import { ReduceStress } from "react-reduce-stress";
 
 // just place it anywhere inside <React.StrictMode>
 root.render(
