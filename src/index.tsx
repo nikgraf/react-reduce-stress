@@ -38,6 +38,10 @@ class OuterComponent extends React.Component {
   }
 }
 
+export const ReduceStress: React.FC<{}> = () => {
+  return <OuterComponent />;
+};
+
 export type SupressWarningsConfig = {
   hooksOrder: string[];
   uniqueKeyInList: string[];
