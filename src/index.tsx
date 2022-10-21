@@ -38,8 +38,71 @@ class OuterComponent extends React.Component {
   }
 }
 
-const ReduceStress: React.FC<{}> = () => {
-  return <OuterComponent />;
+export type SupressWarningsConfig = {
+  hooksOrder: string[];
+  uniqueKeyInList: string[];
+  useNativeDriver: boolean;
+  setNativeProps: boolean;
 };
 
-export default ReduceStress;
+export const supressConsoleWarnings = (config: SupressWarningsConfig) => {
+  const originalConsoleError = console.error;
+  console.error = (...args) => {
+    try {
+      if (
+        (config.hooksOrder &&
+          args[0] &&
+          typeof args[0] === "string" &&
+          args[0].includes(
+            "Warning: React has detected a change in the order of Hooks called by %s"
+          ) &&
+          args[1] &&
+          config.hooksOrder.some((componentName) => {
+            return args[1].includes(componentName);
+          })) ||
+        (config.uniqueKeyInList &&
+          args[0] &&
+          args[0].includes(
+            'Warning: Each child in a list should have a unique "key" prop.'
+          ) &&
+          args[1] &&
+          typeof args[1] === "string" &&
+          config.uniqueKeyInList.some((componentName) => {
+            return args[1].includes(componentName);
+          }))
+      ) {
+        // ignored
+      } else {
+        originalConsoleError(...args);
+      }
+    } catch {
+      originalConsoleError(...args);
+    }
+  };
+
+  const originalConsoleWarn = console.warn;
+  console.warn = (...args) => {
+    try {
+      if (
+        (config.useNativeDriver &&
+          args[0] &&
+          typeof args[0] === "string" &&
+          args[0].includes(
+            "Animated: `useNativeDriver` is not supported because the native animated module is missing. Falling back to JS-based animation."
+          )) ||
+        (config.setNativeProps &&
+          args[0] &&
+          typeof args[0] === "string" &&
+          args[0].includes(
+            "setNativeProps is deprecated. Please update props using React state instead."
+          ))
+      ) {
+        // ignored
+      } else {
+        originalConsoleWarn(...args);
+      }
+    } catch {
+      originalConsoleWarn(...args);
+    }
+  };
+};

@@ -22,6 +22,21 @@ root.render(
 );
 ```
 
+## Supress Console Warnings/Errors usage
+
+```tsx
+supressConsoleWarnings({
+  hooksOrder: ["NavigationHeader"], // hide warnings for hooks order for the NavigationHeader component
+  uniqueKeyInList: ["AvatarGroup"], // hide warnings for unique key in list for the AvatarGroup component
+  useNativeDriver: true, // hide warnings for useNativeDriver (React Native)
+  setNativeProps: true, // hide warnings for setNativeProps (React Native)
+});
+```
+
+Outcome: A peaceful Console at your discression for debugging.
+
+<img width="739" alt="Screenshot of an empty Chrome console" src="https://user-images.githubusercontent.com/223045/197143952-fef64937-7c17-418f-a14e-3b47158bd1c9.png">
+
 ## Roadmap
 
-Sometimes you just really want supress a React console error (when it comes from a package). In the future we provide a simple API to do so.
+If you have warning that really annoyes you, please open a pull-request and we will add it to the list.
